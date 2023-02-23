@@ -27,6 +27,9 @@ export class CLI {
         if (config.generateIndexSitemap) {
             await expoBuilder.registerIndexSitemap();
         }
+        if (config.generateCategorySitemap) {
+            await expoBuilder.registerCategorySitemap(config.categories)
+        }
         // Register robots.txt export if user config allows generation
         if (config?.generateRobotsTxt) {
             await expoBuilder.registerRobotsTxt();

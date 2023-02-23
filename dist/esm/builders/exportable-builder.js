@@ -42,6 +42,32 @@ export class ExportableBuilder {
         this.exportableList.push(item);
     }
     /**
+     * Register sitemap category files
+     */
+    async registerCategorySitemap(categories = []) {
+        categories.map(category => {
+            const { name, test = () => true } = category
+
+            // Get generated sitemap list
+            const sitemaps = [
+                ...this.generatedSitemaps(),
+                // Include additionalSitemaps provided via robots.txt options
+                ...(this.config?.robotsTxtOptions?.additionalSitemaps ?? []),
+            ]
+            // filter matching urls
+            .filter(url => test(url.replace(this.config?.siteUrl)));
+            // Create exportable
+            const item = {
+                type: 'sitemap-category',
+                filename: path.resolve(this.exportDir, name),
+                url: generateUrl(this.config.siteUrl, name),
+                content: this.sitemapBuilder.buildSitemapIndexXml(sitemaps),
+            };
+            // Add to exportable list
+            this.exportableList.push(item);
+        })
+    }
+    /**
      * Resolve filename if index sitemap is generated
      * @param index
      * @returns

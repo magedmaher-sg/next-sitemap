@@ -199,4 +199,9 @@ export interface INextSitemapResult {
     sitemapIndices: string[];
     runtimePaths: IRuntimePaths;
 }
+export interface Category {
+    name: string;
+    test: function;
+}
+export declare type ICategories = Array<Category>
 export {};

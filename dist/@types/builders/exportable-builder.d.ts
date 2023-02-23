@@ -1,4 +1,4 @@
-import type { IConfig, IExportable, INextSitemapResult, IRuntimePaths, ISitemapField } from '../interface.js';
+import type { ICategories, IConfig, IExportable, INextSitemapResult, IRuntimePaths, ISitemapField } from '../interface.js';
 import { SitemapBuilder } from './sitemap-builder.js';
 import { RobotsTxtBuilder } from './robots-txt-builder.js';
 export declare class ExportableBuilder {
@@ -13,6 +13,10 @@ export declare class ExportableBuilder {
      * Register sitemap index files
      */
     registerIndexSitemap(): Promise<void>;
+    /**
+     * Register sitemap category files
+     */
+    registerCategorySitemap(categories: ICategories): Promise<void>;
     /**
      * Resolve filename if index sitemap is generated
      * @param index
